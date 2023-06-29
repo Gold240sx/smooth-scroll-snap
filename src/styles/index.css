@@ -3,13 +3,80 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        scroll-behavior: smooth !important;
+    }
 
+    body {
+        font-family: "Roboto", sans-serif;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        background-color: #333;
+        z-index: 999;
+        transition: transform .5s ease-in-out;
+    }
+
+    .navbar.slide-up {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .section:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 }
 
 @layer components {
+      .menu-icon {
+      @apply flex flex-col justify-between w-6 h-4 cursor-pointer;
+    }
 
+    .menu-icon__line {
+      @apply w-full h-0.5 bg-white transition-transform duration-300 ease-out;
+    }
+
+    .menu-icon__line.active:nth-child(1) {
+      @apply transform translate-y-2 rotate-45;
+    }
+
+    .menu-icon__line.active:nth-child(2) {
+      @apply opacity-0;
+    }
+
+    .menu-icon__line.active:nth-child(3) {
+      @apply transform -translate-y-2 -rotate-45;
+    }
 }
 
 @layer utilities {
-    
+      .snap {
+    scroll-snap-type: var(--scroll-snap-direction) var(--scroll-snap-constraint);
+  }
+  .snap-y {
+    --scroll-snap-direction: y;
+  }
+  .snap-mandatory {
+    --scroll-snap-constraint: mandatory;
+  }
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .scroll-container, .scroll-area {
+    scroll-behavior: smooth;
+  }
+  .scroll-container {
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+  }
+
+  .scroll-area {
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
 }
