@@ -7,8 +7,23 @@
         scroll-behavior: smooth !important;
     }
 
-    body {
+    html, body, #root, main, #app {
+        margin: 0;
+        padding: 0;
+    }
+
+    body, section, main {
         font-family: "Roboto", sans-serif;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    section::-webkit-scrollbar, 
+    body::-webkit-scrollbar, 
+    main::-webkit-scrollbar {
+        -ms-overflow-style: none;
+        display: none !important;
+        width: 0 !important;
     }
 
     .navbar {
@@ -24,9 +39,6 @@
         transition: transform 0.3s ease-in-out;
     }
 
-    .section:nth-child(even) {
-        background-color: #f9f9f9;
-    }
 }
 
 @layer components {

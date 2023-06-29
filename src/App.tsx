@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react"
-// import { Link, animateScroll as scroll } from "react-scroll"
-// import { Link } from "react-router-dom"
+import { Navbar } from "./components/Navbar"
+import { Section } from "./components/Section"
+import { color } from "framer-motion"
+
+//Components
 
 const App: React.FC = () => {
-	const [navbarVisible, setNavbarVisible] = useState(true)
-	const [menuOpen, setMenuOpen] = useState(false)
-	const [prevScrollPos, setPrevScrollPos] = useState(0)
+	const [navbarVisible, setNavbarVisible] = useState<boolean>(true)
+	const [menuOpen, setMenuOpen] = useState<boolean>(false)
+	const [prevScrollPos, setPrevScrollPos] = useState<Number>(0)
+
+	const handleScroll = () => {
+		const currentScrollPos = window.scrollY
+		const visible = currentScrollPos < +prevScrollPos || currentScrollPos < 5
+		setNavbarVisible(visible ? true : false)
+		setPrevScrollPos(currentScrollPos)
+	}
 
 	useEffect(() => {
-		const handleScroll = () => {
-			const currentScrollPos = window.scrollY
-			const visible = currentScrollPos < prevScrollPos || currentScrollPos < 5
-			setNavbarVisible(visible)
-			setPrevScrollPos(currentScrollPos)
-		}
-
 		window.addEventListener("scroll", handleScroll, { passive: true })
 
 		return () => {
@@ -30,105 +33,56 @@ const App: React.FC = () => {
 		setMenuOpen(!menuOpen)
 	}
 
+	const handleScrollToTop = () => {
+		handleScroll() // Manually trigger the scroll event listener
+		handleNavClick()
+		handleMenuClick()
+		window.scrollY = 0
+		setNavbarVisible(true)
+	}
+
 	return (
-		<div className="app" id="top">
+		<div className="app text-zinc-600 dark:text-white" id="top">
 			<a
-				href="#top"
-				className={` fixed bottom-4 left-auto right-4 top-auto bg-zinc-300/40 px-2 py-1`}
+				href="#section1"
+				onClick={handleScrollToTop}
+				className={` smoothscroll fixed bottom-4 left-auto right-4 top-auto z-50 rounded bg-zinc-300/40 px-2 py-1 text-xl`}
 				aria-label="Back to top"
 				title="Back to top">
 				↑
 			</a>
-			<nav
-				className={`transition-300 navbar flex items-center justify-between px-4 py-2 text-white transition-transform ease-out ${
-					!navbarVisible ? "slide-up" : ""
-				}`}>
-				<div>
-					<h1 className="text-lg font-bold">Logo</h1>
-				</div>
-				<div className="menu-icon  ml-auto ease-in-out " onClick={handleMenuClick}>
-					<div className={`menu-icon__line ${menuOpen ? "active" : ""}`} />
-					<div className={`menu-icon__line ${menuOpen ? "active" : ""}`} />
-					<div className={`menu-icon__line ${menuOpen ? "active" : ""}`} />
-				</div>
-
-				<div
-					className={`${
-						menuOpen ? "ml-6 w-fit opacity-100" : "h-0 w-0 text-transparent opacity-0"
-					} transition-opacity duration-300 ease-in`}>
-					<ul className=" flex space-x-4">
-						<li className="nav-link">
-							<a
-								href="#section1"
-								onClick={() => {
-									handleNavClick
-									handleMenuClick
-								}}>
-								Section 1
-							</a>
-						</li>
-						{/* <li className="nav-link">
-							<Link
-								to="section2"
-								onClick={() => {
-									let s2 = document.getElementById("section2")!
-									s2 && s2.scrollIntoView({ behavior: "smooth", block: "start" })
-								}}>
-								Section2
-							</Link>
-						</li> */}
-						<li className="nav-link">
-							<a
-								href="#section2"
-								className="smoothscroll"
-								onClick={() => {
-									handleNavClick()
-									handleMenuClick()
-								}}>
-								Section 2
-							</a>
-						</li>
-
-						<li className="nav-link">
-							<a
-								href="#section3"
-								onClick={() => {
-									handleNavClick
-									handleMenuClick
-								}}>
-								Section 3
-							</a>
-						</li>
-						<li className="nav-link">
-							<a
-								href="#section4"
-								onClick={() => {
-									handleNavClick
-									handleMenuClick
-								}}>
-								Section 4
-							</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
+			<Navbar
+				navbarVisible={navbarVisible}
+				setNavbarVisible={setNavbarVisible}
+				menuOpen={menuOpen}
+				handleNavClick={handleNavClick}
+				handleMenuClick={handleMenuClick}
+			/>
 
 			<main className="scroll-container snap max-h-screen snap-y snap-mandatory overflow-y-scroll">
-				<section className={`${navbarVisible ? "" : ""} scroll-area h-screen w-full  snap-start bg-white `} id="section1">
-					<h2 className="text-3xl font-bold">Section 1</h2>
-				</section>
-				<div
-					className={`${navbarVisible ? "" : ""} scroll-area h-screen w-full snap-start bg-zinc-200`}
+				<Section id="section1" title="Section 1" snap="center" fadeIn={true} height="screen" navbarVisible={navbarVisible} />
+				<Section
 					id="section2"
-					title="section2">
-					<h2 className="text-3xl font-bold">Section 2</h2>
-				</div>
-				<section className={`${navbarVisible ? "" : ""} scroll-area h-screen w-full  snap-start bg-white `} id="section3">
-					<h2 className="text-3xl font-bold">Section 3</h2>
-				</section>
-				<section className={`${navbarVisible ? "" : ""} scroll-area h-screen w-full snap-start bg-zinc-200`} id="section4">
-					<h2 className="text-3xl font-bold">Section 4</h2>
-				</section>
+					title="Section 2"
+					snap="center"
+					bg={{ color: "dark:bg-zinc-900 bg-zinc-100" }}
+					fadeIn={true}
+					height="screen"
+					navbarVisible={navbarVisible}
+				/>
+				<Section id="section3" title="Section 3" snap="start" fadeIn={true} height="250vh" navbarVisible={navbarVisible} />
+				<Section
+					id="section4"
+					title="Section 4"
+					snap="center"
+					bg={{ color: "dark:bg-zinc-900 bg-zinc-100" }}
+					fadeIn={true}
+					height="screen"
+					navbarVisible={navbarVisible}
+				/>
+				<footer className={`${navbarVisible ? "" : ""} scroll-area h-[20vh] w-full snap-end bg-black`} id="section4">
+					<h2 className="text-xl font-bold text-white">Footer</h2>
+				</footer>
 			</main>
 		</div>
 	)
