@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 // import { Link, animateScroll as scroll } from "react-scroll"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 const App: React.FC = () => {
 	const [navbarVisible, setNavbarVisible] = useState(true)
