@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { Navbar } from "./components/Navbar.tsx"
-import { Section } from "./components/Section.tsx"
+import { Navbar } from "./components/Navbar"
+import { Section } from "./components/Section"
 
 //Components
 
@@ -41,7 +41,7 @@ const App: React.FC = () => {
 	}
 
 	return (
-		<div className="app text-zinc-600 dark:text-white" id="top">
+		<div className="app text-zinc-600 dark:bg-black dark:text-white" id="top">
 			<a
 				href="#section1"
 				onClick={handleScrollToTop}

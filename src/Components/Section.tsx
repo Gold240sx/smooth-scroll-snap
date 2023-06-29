@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { ScrollBottomBar } from "./Scroll-Bottom-Bar.tsx"
+import { ScrollBottomBar } from "./Scroll-Bottom-Bar"
 
 interface SectionProps {
 	navbarVisible: Boolean
