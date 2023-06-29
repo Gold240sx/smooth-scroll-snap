@@ -11,6 +11,7 @@
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
+		"baseUrl": ".", // Required for `paths` to work
 		"noEmit": true,
 		"jsx": "react-jsx",
 
@@ -20,6 +21,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src", "src/**/*.ts", "src/**/*.tsx"],
+	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
