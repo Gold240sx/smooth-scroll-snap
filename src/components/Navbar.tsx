@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navbarVisible, setNavbarVisible,
 				<h1 className={` ${menuOpen && "w-0 opacity-0 "} text-lg font-bold`}>Logo</h1>
 			</div>
 			<div
-				className="menu-icon-container group ml-auto h-fit w-fit cursor-pointer px-1 py-2 ease-in-out hover:bg-white/20"
+				className="menu-icon-container group ml-auto h-fit w-fit cursor-pointer rounded px-1 py-2 ease-in-out hover:bg-white/20"
 				onClick={handleMenuClick}>
 				<div className={`menu-icon  ${menuOpen ? "active" : ""} group:hover:bg-white/20 group:cursor-pointer`}>
 					<div className={`menu-icon__line ${menuOpen ? "active" : ""} group:hover:bg-white/20 group:cursor-pointer`} />
