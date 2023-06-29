@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { Navbar } from "./components/Navbar"
-import { Section } from "./components/Section"
+import { Navbar } from "./components/Navbar.tsx"
+import { Section } from "./components/Section.tsx"
 
 //Components
 
